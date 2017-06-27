@@ -1,0 +1,12 @@
+node_modules/
+coverage/
+scripts/
+test/
+docs/
+tmp/
+*.log
+*.tgz
+.*
+Makefile
+karma.conf.js
+yarn.lock

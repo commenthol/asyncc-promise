@@ -1,0 +1,54 @@
+import eachLimit from './eachLimit'
+
+/**
+* Run `items` on async `task` function in parallel.
+*
+* Does not stop parallel execution on errors. *All tasks get executed.*
+*
+* @name each
+* @memberOf module:parallel
+* @static
+* @method
+* @param {Array} items - Array of items `any[]`
+* @param {Function} task - iterator function of type `function (item: any, index: Number)` returning a Promise
+* @return {Promise} on resolve `.then(results => {})` where `results: Array<any>` and
+* on reject `.catch(error => {})` where `error` is the first thrown error containing the
+* properties
+* - `errors: Array<Error>` list of errors
+* - `errpos: Array<Number>` gives the positions of errors in order as they occur.
+* - `results: Array<Any>` returns the successfull results or undefined
+* @example <caption>without errors</caption>
+* each([1, 2, 3],
+*   (item, index) => (
+*     new Promise((resolve, reject) => {
+*       resolve(item + index)
+*   }))
+* )
+* .then((results) => {
+*   console.log(results)
+*   //> [1, 3, 5]
+* })
+* @example <caption>with errors</caption>
+* each([1, 2, 3],
+*   (item, index) => (
+*     new Promise((resolve, reject) => {
+*       if (index % 2) resolve(item + index)
+*       else reject(new TypeError('error'))
+*   }))
+* )
+* .catch((err) => { //
+*   console.log(err)
+*   //> { TypeError: error
+*   //>   errors: [
+*   //>     [Circular],
+*   //>     null,
+*   //>     TypeError: error
+*   //>   ],
+*   //>   errpos: [0, 2],
+*   //>   results: [undefined, 3, undefined]
+*   //> }
+* })
+*/
+export default function each (items, task) {
+  return eachLimit(0, items, task)
+}
