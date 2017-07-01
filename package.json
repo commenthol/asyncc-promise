@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "author": "commenthol <commenthol@gmail.com>",
-  "main": "lib",
+  "main": "dist",
   "jsnext:main": "src",
   "directories": {
     "test": "test"
@@ -47,7 +47,8 @@
       "standard"
     ],
     "rules": {
-      "spaced-comment": 0
+      "spaced-comment": 0,
+      "no-new": 0
     }
   },
   "dependencies": {},
@@ -76,7 +77,7 @@
     "mocha": "^3.4.2",
     "nyc": "^11.0.3",
     "rimraf": "^2.6.1",
-    "rollup-plugin-buble": "^0.15.0"
-  },
-  "__main": "dist/bundle.js"
+    "rollup-plugin-buble": "^0.15.0",
+    "rollup-watch": "^4.0.0"
+  }
 }

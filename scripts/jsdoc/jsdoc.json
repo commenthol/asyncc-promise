@@ -1,0 +1,24 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "include": ["./src"]
+  },
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "readme": "README.md",
+    "template": "./template",
+    "encoding": "utf8",
+    "destination": "./docs",
+    "recurse": true
+  },
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": true,
+    "default": {
+      "includeDate": false
+    }
+  }
+}

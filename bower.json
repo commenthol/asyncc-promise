@@ -1,0 +1,22 @@
+{
+  "name": "asyncc-promise",
+  "description": "Just asynchronous patterns for promises",
+  "main": "dist/index.js",
+  "authors": [
+    "commenthol <commenthol@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "async",
+    "pattern",
+    "promise"
+  ],
+  "homepage": "https://github.com/commenthol/asyncc-promise",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

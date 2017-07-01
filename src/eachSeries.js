@@ -1,3 +1,5 @@
+import {EachSeries} from './intern/Series'
+
 /**
 * Run `items` on async `task` function in series. Stops at the first error encountered.
 *
@@ -6,8 +8,12 @@
 * @static
 * @method
 * @param {Array<any>} items - Array of items
-* @param {Function} task - iterator function of type `function (item: any, cb: Function, index: Number)`
-* @return {Promise}
+* @param {Function} task - iterator function of type `(item: any, index: Number) => Promise`
+* @return {Promise} on resolve `.then(results: Array<any> => {})` and
+* on reject `.catch(error => {})` where `error` is the first thrown
+* error containing the properties:
+* - `results: Array<Any>` returns the successfull results or undefined
+*
 * @example <caption>without errors</caption>
 * eachSeries([1, 2, 3, 4],
 *   (item, index) => (
@@ -19,46 +25,24 @@
 *     console.log(results)
 *     //> [1, 3, 5, 7]
 *   })
+*
 * @example <caption>with errors</caption>
 * eachSeries([1, 2, 3, 4],
 *   (item, index) => (
 *     new Promise((resolve, reject) => {
 *       if (index !== 2) resolve(item + index)
-*       else reject(new TypeError('error'))
+*       else reject(new Error('error'))
 *     })
 *   ))
 *   .catch((err) => { //
 *     console.log(err)
-*     //> { TypeError: error
+*     //> { Error: error
 *     //>   results: [ 1, 3, undefined ]
 *     //> }
 *   })
 */
 export default function eachSeries (items, task) {
   return new Promise((resolve, reject) => {
-    let length = items.length
-    let results = []
-    let i = 0
-
-    function cb (err, res) {
-      results.push(res)
-      /* istanbul ignore else  */
-      if (err) {
-        reject(Object.assign(err, {results}))
-      } else if (length === i) {
-        resolve(results)
-      } else if (i < length) {
-        run()
-      }
-    }
-
-    function run () {
-      let item = items[i]
-      task(item, i++)
-        .then((res) => cb(null, res))
-        .catch((err) => cb(err))
-    }
-
-    run()
+    new EachSeries(items, task, resolve, reject) // eslint-disable-line no-new
   })
 }

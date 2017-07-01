@@ -1,5 +1,8 @@
+import {EachLimit} from './intern/Parallel'
+
 /**
-* Run `items` on async `task` promise in parallel limited to `limit` parallel.
+* Run `items` on async `task` promise in parallel limited to `limit` running in
+* parallel.
 *
 * Does not stop parallel execution on errors. *All tasks get executed.*
 *
@@ -8,14 +11,18 @@
 * @static
 * @method
 * @param {Number} limit - number of tasks running in parallel
-* @param {Array} items - Array of items `any[]`
-* @param {Function} task - iterator function of type `function (item: any, index: Number)` returning a Promise
-* @return {Promise} on resolve `.then(results => {})` where `results: Array<any>` and
-* on reject `.catch(error => {})` where `error` is the first thrown error containing the
-* properties
+* @param {Array<any>} items - Array of items
+* @param {Function} task - iterator function of type `(item: any, index: Number) => Promise`
+* @param {Object} [options]
+* @param {Number} [options.timeout] - timeout in ms which throwing `AsynccError` in case that `tasks` are still running
+* @param {Boolean} [options.bail] - bail-out on first error
+* @return {Promise} on resolve `.then(results: Array<any> => {})` and
+* on reject `.catch(error: AsynccError => {})` where `error` is the first thrown
+* error containing the properties:
 * - `errors: Array<Error>` list of errors
 * - `errpos: Array<Number>` gives the positions of errors in order as they occur.
 * - `results: Array<Any>` returns the successfull results or undefined
+*
 * @example <caption>without errors</caption>
 * eachLimit(2, [1, 2, 3, 4],
 *  (item, index) => (
@@ -44,46 +51,8 @@
 *  //> }
 * })
 */
-export default function eachLimit (limit, items, task) {
+export default function eachLimit (limit, items, task, opts) {
   return new Promise((resolve, reject) => {
-    let length = items.length
-    limit = Math.abs(limit || length)
-    let errpos = []
-    let errors = new Array(length)
-    let results = new Array(length)
-    let i = 0
-    let l = length
-
-    function cb (j, err, res) {
-      results[j] = res
-      errors[j] = err
-      if (err) errpos.push(j)
-      l--
-      if (i < length) {
-        run(i++)
-      } else if (!l) {
-        if (!errpos.length) {
-          resolve(results)
-        } else {
-          const err = errors[0] instanceof Error ? errors[0] : new Error('')
-          Object.assign(err, {errors, errpos, results})
-          reject(err)
-        }
-      }
-    }
-
-    function run (j) {
-      let item = items[j]
-      task(item, j)
-        .then((res) => cb(j, null, res))
-        .catch((err) => cb(j, err))
-    }
-
-    (function () {
-      limit = limit < length ? limit : length
-      while (i < limit) {
-        run(i++)
-      }
-    })()
+    new EachLimit(limit, items, task, opts, resolve, reject)
   })
 }

@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {Timeout} from './src/helper'
+import {Timeout} from './intern/helper'
 import {each} from '..'
 
 describe('#each', function () {
@@ -10,7 +10,7 @@ describe('#each', function () {
   it('each', function () {
     let t = new Timeout()
     return each(items,
-      (item) => t.task(item)
+      (item) => t.task(item)()
     ).then((res) => {
       assert.deepEqual(t.order, [4, 13, 22, 31, 40])
       assert.deepEqual(res, items)
@@ -27,7 +27,7 @@ describe('#each', function () {
         } else if (index === 3) {
           err = 'error2'
         }
-        return t.task(item, err)
+        return t.task(item, err)()
       })
       .then(() => assert.ok(true, 'should not reach here'))
       .catch((err) => {
