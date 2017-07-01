@@ -1,6 +1,6 @@
 {
   "name": "asyncc-promise",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Just asynchronous patterns for promises",
   "keywords": [
     "async",
