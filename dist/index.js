@@ -7,10 +7,14 @@
 var AsynccError = (function (Error) {
   function AsynccError (message, errors, errpos, results) {
     Error.call(this, message);
-    this.name = 'AsynccError';
-    this.errors = errors;
-    this.errpos = errpos;
-    if (results) { this.results = results; }
+    Object.assign(this, {
+      name: 'AsynccError',
+      message: message,
+      errors: errors,
+      errpos: errpos,
+      results: results,
+      stack: this.stack || new Error().stack
+    });
   }
 
   if ( Error ) AsynccError.__proto__ = Error;
@@ -38,7 +42,6 @@ BaseSeries.prototype.cb = function cb (err, res) {
     var length = ref.length;
     var i = ref.i;
   results.push(res);
-  /* istanbul ignore else*/
   if (err) {
     err = typeof err === 'object' ? err : new Error(err);
     this.reject(Object.assign(err, {results: results}));
@@ -110,7 +113,6 @@ var Compose = (function (Series) {
     var ref = this;
     var length = ref.length;
     var i = ref.i;
-    /* istanbul ignore else  */
     if (err) {
       err = typeof err === 'object' ? err : new Error(err);
       this.reject(err);
@@ -764,9 +766,10 @@ function parallel (tasks, opts) {
 * @return {Function} returning `Promise`
 *
 * @example
-* const fn = (t, a, cb) => setTimeout(() => cb(a), t)
-* const p = promisify(fn)
-* p(10, 'a').then((res) => {
+* const fn = (timeout, payload, cb) =>
+*   setTimeout(() => cb(null, payload), timeout)
+* const promise = promisify(fn)
+* promise(10, 'a').then((res) => {
 *   //> res = 'a'
 * })
 */

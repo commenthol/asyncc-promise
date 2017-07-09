@@ -9,9 +9,10 @@
 * @return {Function} returning `Promise`
 *
 * @example
-* const fn = (t, a, cb) => setTimeout(() => cb(a), t)
-* const p = promisify(fn)
-* p(10, 'a').then((res) => {
+* const fn = (timeout, payload, cb) =>
+*   setTimeout(() => cb(null, payload), timeout)
+* const promise = promisify(fn)
+* promise(10, 'a').then((res) => {
 *   //> res = 'a'
 * })
 */

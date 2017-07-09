@@ -1,9 +1,13 @@
 export default class AsynccError extends Error {
   constructor (message, errors, errpos, results) {
     super(message)
-    this.name = 'AsynccError'
-    this.errors = errors
-    this.errpos = errpos
-    if (results) this.results = results
+    Object.assign(this, {
+      name: 'AsynccError',
+      message,
+      errors,
+      errpos,
+      results,
+      stack: this.stack || new Error().stack
+    })
   }
 }

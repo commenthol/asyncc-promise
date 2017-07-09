@@ -38,7 +38,7 @@ dist/index.js: src
 	&& npm version
 
 dist/index.min.js: dist/index.js
-	uglifyjs $< -c -m -o $@
+	`npm bin`/uglifyjs $< -c -m -o $@
 
 build: lib dist
 

@@ -15,7 +15,6 @@ export class BaseSeries {
   cb (err, res) {
     const {results, length, i} = this
     results.push(res)
-    /* istanbul ignore else  */
     if (err) {
       err = typeof err === 'object' ? err : new Error(err)
       this.reject(Object.assign(err, {results}))
@@ -61,7 +60,6 @@ export class Series extends BaseSeries {
 export class Compose extends Series {
   cb (err, res) {
     const {length, i} = this
-    /* istanbul ignore else  */
     if (err) {
       err = typeof err === 'object' ? err : new Error(err)
       this.reject(err)
