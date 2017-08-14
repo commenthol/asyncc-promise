@@ -17,8 +17,8 @@ import {Times} from './intern/Until'
 * @returns {Promise}
 *
 * @example
-* var arr = []
-* return times(4,
+* let arr = []
+* times({times: 4, lag: 100}, // 4 times with 100ms time-lag between retries
 *   (index) => new Promise((resolve) => {
 *     arr.push(index)
 *     resolve(index)
