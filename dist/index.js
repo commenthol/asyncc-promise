@@ -779,12 +779,9 @@ var promisify = function (fn) { return function () {
 
     return (
     new Promise(function (resolve, reject) {
-      fn.apply(void 0, args.concat( [function (err) {
-        var res = [], len = arguments.length - 1;
-        while ( len-- > 0 ) res[ len ] = arguments[ len + 1 ];
-
+      fn.apply(void 0, args.concat( [function (err, res) {
         if (err) { reject(err); }
-        else { resolve.apply(void 0, res); }
+        else { resolve(res); }
       }] ));
     })
   );
@@ -890,8 +887,8 @@ function series (tasks) {
 * @returns {Promise}
 *
 * @example
-* var arr = []
-* return times(4,
+* let arr = []
+* times({times: 4, lag: 100}, // 4 times with 100ms time-lag between retries
 *   (index) => new Promise((resolve) => {
 *     arr.push(index)
 *     resolve(index)
