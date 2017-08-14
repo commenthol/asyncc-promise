@@ -46,12 +46,12 @@ lib:
 	npm run transpile
 
 pack: node_modules build
-	rm *.tgz
+	rm -f *.tgz
 	npm pack
 	tar tvzf *.tgz
 
 publish: node_modules build gitChanges
-	rm *.tgz
+	rm -f *.tgz
 	npm publish
 
 node_modules:
