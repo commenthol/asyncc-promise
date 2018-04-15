@@ -1,9 +1,9 @@
 # asyncc-promise
 
-[![NPM version](https://badge.fury.io/js/asyncc-promise.svg)](https://www.npmjs.com/package/asyncc-promise/)
-[![build status](https://secure.travis-ci.org/commenthol/asyncc-promise.png)](http://travis-ci.org/commenthol/asyncc-promise)
-
 > Just asynchronous patterns for promises
+
+[![NPM version](https://badge.fury.io/js/asyncc-promise.svg)](https://www.npmjs.com/package/asyncc-promise/)
+[![Build Status](https://travis-ci.org/commenthol/asyncc-promise.svg?branch=master)](http://travis-ci.org/commenthol/asyncc-promise)
 
 Runs in the browser and on node.  
 

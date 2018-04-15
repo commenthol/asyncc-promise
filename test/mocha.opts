@@ -1,4 +1,2 @@
---compilers js:babel-core/register
+--require babel-register
 --check-leaks
---colors
---growl

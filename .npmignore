@@ -8,5 +8,6 @@ tmp/
 *.tgz
 .*
 Makefile
-karma.conf.js
+*.conf.js
 yarn.lock
+examples/

@@ -25,7 +25,7 @@ export class BaseUntil {
   cb (err, res) {
     const {resolve, reject, run, test, i} = this
     if (err) {
-      err = typeof err === 'object' ? err : new Error(err)
+      err = (typeof err === 'object' ? err : new Error(err))
       reject(err)
     } else if (test(i)) {
       resolve(res)

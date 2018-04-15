@@ -29,16 +29,13 @@ push: gitChanges
 docs: src scripts
 	npm run doc
 
-dist: src dist/index.min.js dist/index.js
+dist: src dist/index.js
 
 dist/index.js: src
 	npm run lint \
 	&& npm run build \
-	&& npm run mocha \
+	&& npm run test:mocha \
 	&& npm version
-
-dist/index.min.js: dist/index.js
-	`npm bin`/uglifyjs $< -c -m -o $@
 
 build: lib dist
 
@@ -46,12 +43,12 @@ lib:
 	npm run transpile
 
 pack: node_modules build
-	rm -f *.tgz
+	rm *.tgz
 	npm pack
 	tar tvzf *.tgz
 
 publish: node_modules build gitChanges
-	rm -f *.tgz
+	rm *.tgz
 	npm publish
 
 node_modules:
