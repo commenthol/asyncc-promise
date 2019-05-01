@@ -1,4 +1,4 @@
-import {EachLimit} from './intern/Parallel'
+import { EachLimit } from './intern/Parallel'
 
 /**
 * Run `items` on async `task` promise in parallel limited to `limit` running in

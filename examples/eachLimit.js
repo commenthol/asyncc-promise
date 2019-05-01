@@ -1,4 +1,4 @@
-const {eachLimit} = require('..')
+const { eachLimit } = require('..')
 
 // without errors
 eachLimit(2, [1, 2, 3, 4],

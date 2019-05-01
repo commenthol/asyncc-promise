@@ -1,4 +1,4 @@
-const {series: series1} = require('..')
+const { series: series1 } = require('..')
 
 /**
 * This series implementation has drawbacks if processing huge arrays
@@ -10,7 +10,7 @@ const series2 = (tasks) => // eslint-disable-line no-unused-vars
         .then((r) => results.concat(r))
         .catch((err) => {
           err = typeof err === 'object' ? err : new Error(err)
-          Object.assign(err, {results})
+          Object.assign(err, { results })
           throw err
         })
     )

@@ -14,7 +14,7 @@ export class BaseUntil {
   }
 
   init () {
-    const {test, run, i, resolve} = this
+    const { test, run, i, resolve } = this
     if (!test(i)) {
       run()
     } else {
@@ -23,7 +23,7 @@ export class BaseUntil {
   }
 
   cb (err, res) {
-    const {resolve, reject, run, test, i} = this
+    const { resolve, reject, run, test, i } = this
     if (err) {
       err = (typeof err === 'object' ? err : new Error(err))
       reject(err)
@@ -35,7 +35,7 @@ export class BaseUntil {
   }
 
   run () {
-    const {cb, task} = this
+    const { cb, task } = this
     task(this.i++)
       .then((res) => cb(null, res))
       .catch((err) => cb(err))
@@ -64,7 +64,7 @@ export class Times extends BaseUntil {
   }
 
   init () {
-    const {times, run, resolve} = this
+    const { times, run, resolve } = this
     if (times) {
       run()
     } else {
@@ -85,7 +85,7 @@ export class Times extends BaseUntil {
 
 export class Retry extends Times {
   cb (err, res) {
-    const {resolve, reject, run, test, i} = this
+    const { resolve, reject, run, test, i } = this
     if (!err || test(i)) {
       if (err) {
         err = typeof err === 'object' ? err : new Error(err)

@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {whilst} from '..'
+import { whilst } from '..'
 
 describe('#whilst', function () {
   it('should run until condition returns false', function () {
@@ -15,8 +15,8 @@ describe('#whilst', function () {
     ).then((res) => {
       //> res = 3
       //> arr = [0, 1, 2, 3]
-      assert.equal(res, 3)
-      assert.deepEqual(arr, [0, 1, 2, 3])
+      assert.strictEqual(res, 3)
+      assert.deepStrictEqual(arr, [0, 1, 2, 3])
     })
   })
 
@@ -31,7 +31,7 @@ describe('#whilst', function () {
         }
       })
     ).catch((err) => {
-      assert.equal(err.message, 10000)
+      assert.strictEqual(err.message, '10000')
     })
   })
 })

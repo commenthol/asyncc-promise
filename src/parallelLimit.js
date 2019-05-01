@@ -1,4 +1,4 @@
-import {ParallelLimit} from './intern/Parallel'
+import { ParallelLimit } from './intern/Parallel'
 
 /**
 * Run `tasks` returning Promises in parallel limited to `limit` parallel

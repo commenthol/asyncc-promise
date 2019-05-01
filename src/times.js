@@ -1,4 +1,4 @@
-import {Times} from './intern/Until'
+import { Times } from './intern/Until'
 
 /**
 * Run `task` repeatedly until number `times` is reached.

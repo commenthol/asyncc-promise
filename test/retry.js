@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {retry} from '..'
+import { retry } from '..'
 
 describe('#retry', function () {
   it('should retry min. 2 times - passing times = 0', function () {
@@ -13,20 +13,20 @@ describe('#retry', function () {
       }
     ).catch((err) => {
       assert.ok(err)
-      assert.deepEqual(arr, [0, 1])
+      assert.deepStrictEqual(arr, [0, 1])
     })
   })
 
   it('should retry min. 2 times - passing times = 0', function () {
     let arr = []
-    return retry({times: 0},
+    return retry({ times: 0 },
       (index) => {
         arr.push(index)
         return Promise.reject(new Error())
       }
     ).catch((err) => {
       assert.ok(err)
-      assert.deepEqual(arr, [0, 1])
+      assert.deepStrictEqual(arr, [0, 1])
     })
   })
 
@@ -39,7 +39,7 @@ describe('#retry', function () {
       }
     ).catch((err) => {
       assert.ok(err)
-      assert.deepEqual(arr, [0, 1, 2, 3])
+      assert.deepStrictEqual(arr, [0, 1, 2, 3])
     })
   })
 
@@ -53,8 +53,8 @@ describe('#retry', function () {
         else resolve(index)
       })
     ).then((res) => { // callback
-      assert.equal(res, 2)
-      assert.deepEqual(arr, [0, 1, 2])
+      assert.strictEqual(res, 2)
+      assert.deepStrictEqual(arr, [0, 1, 2])
     })
   })
 
@@ -67,14 +67,14 @@ describe('#retry', function () {
       }
     ).catch((err) => {
       assert.ok(err)
-      assert.deepEqual(arr, [0])
+      assert.deepStrictEqual(arr, [0])
     })
   })
 
   it('should run with lag', function () {
     let arr = []
     let start = Date.now()
-    return retry({times: 4, lag: 10},
+    return retry({ times: 4, lag: 10 },
       (index) => {
         arr.push(index)
         return Promise.reject(new Error())
@@ -83,7 +83,7 @@ describe('#retry', function () {
       let end = Date.now() - start
       assert.ok(err)
       assert.ok(end >= 3 * 10, 'it took ' + end)
-      assert.deepEqual(arr, [0, 1, 2, 3])
+      assert.deepStrictEqual(arr, [0, 1, 2, 3])
     })
   })
 })

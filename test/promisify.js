@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {promisify} from '..'
+import { promisify } from '..'
 
 describe('#promisify', function () {
   it('should promisify callback', function () {
@@ -11,7 +11,7 @@ describe('#promisify', function () {
     const promise = promisify(fn)
     return promise(10, 'a').then((res) => {
       //> res = 'a'
-      assert.equal(res, 'a')
+      assert.strictEqual(res, 'a')
     })
   })
 
@@ -26,7 +26,7 @@ describe('#promisify', function () {
       })
       .catch((err) => {
         assert.ok(err)
-        assert.equal(err.message, 'bad')
+        assert.strictEqual(err.message, 'bad')
       })
   })
 })

@@ -1,7 +1,7 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {until} from '..'
+import { until } from '..'
 
 describe('#until', function () {
   it('should run until condition returns true', function () {
@@ -15,8 +15,8 @@ describe('#until', function () {
     ).then((res) => {
       //> res = 3
       //> arr = [0, 1, 2, 3]
-      assert.equal(res, 3)
-      assert.deepEqual(arr, [0, 1, 2, 3])
+      assert.strictEqual(res, 3)
+      assert.deepStrictEqual(arr, [0, 1, 2, 3])
     })
   })
 
@@ -29,8 +29,8 @@ describe('#until', function () {
         resolve(index)
       })
     ).then((res) => {
-      assert.equal(res, undefined)
-      assert.deepEqual(arr, [])
+      assert.strictEqual(res, undefined)
+      assert.deepStrictEqual(arr, [])
     })
   })
 })

@@ -1,4 +1,4 @@
-import {Compose} from './intern/Series'
+import { Compose } from './intern/Series'
 
 /**
 * Run composed `tasks` promises in series.

@@ -1,8 +1,8 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {Timeout} from './intern/helper'
-import {parallelLimit} from '..'
+import { Timeout } from './intern/helper'
+import { parallelLimit } from '..'
 
 describe('#parallelLimit', function () {
   it('parallelLimit', function () {
@@ -15,8 +15,8 @@ describe('#parallelLimit', function () {
       t.task(14)
     ]).then((res) => {
       // skipped as of randomly appearing race condition with small timeouts
-      // assert.deepEqual(t.order, [31, 40, 3, 22, 14])
-      assert.deepEqual(res, [40, 31, 22, 3, 14])
+      // assert.deepStrictEqual(t.order, [31, 40, 3, 22, 14])
+      assert.deepStrictEqual(res, [40, 31, 22, 3, 14])
     })
   })
 
@@ -31,10 +31,10 @@ describe('#parallelLimit', function () {
     ]).then((res) => {
       assert.ok(false)
     }).catch((err) => {
-      // assert.deepEqual(t.order, [4, 13, 22, 31, 40])
-      assert.deepEqual(err.errors, [undefined, 'error1', undefined, 'error2', undefined])
-      assert.deepEqual(err.results, [40, undefined, 22, undefined, 4])
-      assert.deepEqual(err.errpos, [3, 1])
+      // assert.deepStrictEqual(t.order, [4, 13, 22, 31, 40])
+      assert.deepStrictEqual(err.errors, [null, 'error1', null, 'error2', null])
+      assert.deepStrictEqual(err.results, [40, undefined, 22, undefined, 4])
+      assert.deepStrictEqual(err.errpos, [3, 1])
     })
   })
 })

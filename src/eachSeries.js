@@ -1,4 +1,4 @@
-import {EachSeries} from './intern/Series'
+import { EachSeries } from './intern/Series'
 
 /**
 * Run `items` on async `task` function in series. Stops at the first error encountered.

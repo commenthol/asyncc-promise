@@ -8,7 +8,7 @@ export class BaseParallel {
       opts: opts || {},
       resolve,
       reject,
-      error: new AsynccError('err', new Array(length).fill(), []),
+      error: new AsynccError('err', new Array(length).fill(null), []),
       results: new Array(length).fill(),
       done: 0,
       i: 0,
@@ -35,20 +35,20 @@ export class BaseParallel {
   }
 
   final (errMsg) {
-    let {error, results} = this
+    let { error, results } = this
     if (this.done++) return
     if (error.errpos.length || errMsg) {
       if (errMsg) error.message = errMsg
-      this.reject(Object.assign(error, {results}))
+      this.reject(Object.assign(error, { results }))
     } else {
       this.resolve(results)
     }
   }
 
   cb (j, err, res) {
-    let {error, results, opts} = this
+    let { error, results, opts } = this
     results[j] = res
-    error.errors[j] = err
+    error.errors[j] = err || null
     if (err) {
       error.errpos.push(j)
       if (opts.bail) {
@@ -70,7 +70,7 @@ export class BaseParallel {
 export class EachLimit extends BaseParallel {
   constructor (limit, items, task, opts, resolve, reject) {
     super(limit, items.length, opts, resolve, reject)
-    Object.assign(this, {items, task})
+    Object.assign(this, { items, task })
     this.init()
   }
 
@@ -84,7 +84,7 @@ export class EachLimit extends BaseParallel {
 export class ParallelLimit extends BaseParallel {
   constructor (limit, tasks, opts, resolve, reject) {
     super(limit, tasks.length, opts, resolve, reject)
-    Object.assign(this, {tasks})
+    Object.assign(this, { tasks })
     this.init()
   }
 

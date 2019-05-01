@@ -1,4 +1,4 @@
-import {DoUntil} from './intern/Until'
+import { DoUntil } from './intern/Until'
 
 /**
 * Run `task` one or more times until `test` returns `true`.

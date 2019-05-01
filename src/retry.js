@@ -1,4 +1,4 @@
-import {Retry} from './intern/Until'
+import { Retry } from './intern/Until'
 
 /**
 * Run `task` max. `times` times. Stops at first iteration where no error is returned.

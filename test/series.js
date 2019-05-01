@@ -1,8 +1,8 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {Timeout} from './intern/helper'
-import {series} from '..'
+import { Timeout } from './intern/helper'
+import { series } from '..'
 require('core-js/es6/array.js')
 
 describe('#series', function () {
@@ -13,7 +13,7 @@ describe('#series', function () {
       () => Promise.resolve(3),
       () => Promise.resolve(2)
     ]).then((res) => {
-      assert.deepEqual(res, [5, 4, 3, 2, 1])
+      assert.deepStrictEqual(res, [5, 4, 3, 2, 1])
     }).catch(() => {})
   })
 
@@ -26,7 +26,7 @@ describe('#series', function () {
       t.task(11),
       t.task(10)
     ]).then((res) => {
-      assert.deepEqual(res, [14, 13, 12, 11, 10])
+      assert.deepStrictEqual(res, [14, 13, 12, 11, 10])
     }).catch(() => {})
   })
 
@@ -41,8 +41,8 @@ describe('#series', function () {
     ]).then((res) =>
       assert.ok(false)
     ).catch((err) => {
-      assert.deepEqual(err.message, 'error1')
-      assert.deepEqual(err.results, [14, undefined])
+      assert.deepStrictEqual(err.message, 'error1')
+      assert.deepStrictEqual(err.results, [14, undefined])
     })
   })
 

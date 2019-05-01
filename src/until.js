@@ -1,4 +1,4 @@
-import {Until} from './intern/Until'
+import { Until } from './intern/Until'
 
 /**
 * Run `task` repeatedly until `test` returns `true`.

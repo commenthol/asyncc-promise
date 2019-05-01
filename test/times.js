@@ -2,7 +2,7 @@
 /* eslint standard/no-callback-literal:0 */
 
 import assert from 'assert'
-import {times} from '..'
+import { times } from '..'
 
 describe('#times', function () {
   it('should run 4 times', function () {
@@ -17,8 +17,8 @@ describe('#times', function () {
     ).then((res) => {
       //> res = 3
       //> arr = [0, 1, 2, 3]
-      assert.equal(res, 3)
-      assert.deepEqual(arr, [0, 1, 2, 3])
+      assert.strictEqual(res, 3)
+      assert.deepStrictEqual(arr, [0, 1, 2, 3])
     })
   })
 
@@ -34,8 +34,8 @@ describe('#times', function () {
         }
       })
     ).catch((err) => {
-      assert.deepEqual(err.message, 'error')
-      assert.deepEqual(arr, [0, 1])
+      assert.deepStrictEqual(err.message, 'error')
+      assert.deepStrictEqual(arr, [0, 1])
     })
   })
 
@@ -59,7 +59,7 @@ describe('#times', function () {
         }
       })
     ).catch((err) => {
-      assert.equal(err.message, 1000)
+      assert.strictEqual(err.message, '1000')
     })
   })
 
@@ -75,16 +75,16 @@ describe('#times', function () {
   it('should run with lag', function () {
     let arr = []
     let start = Date.now()
-    return times({times: 4, lag: 10},
+    return times({ times: 4, lag: 10 },
       (index) => new Promise((resolve) => {
         arr.push(index)
         resolve(index)
       })
     ).then((res) => {
       let end = Date.now() - start
-      assert.equal(res, 3)
+      assert.strictEqual(res, 3)
       assert.ok(end >= 3 * 10, 'it took ' + end)
-      assert.deepEqual(arr, [0, 1, 2, 3])
+      assert.deepStrictEqual(arr, [0, 1, 2, 3])
     })
   })
 })

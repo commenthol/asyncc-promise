@@ -1,4 +1,4 @@
-const {parallel} = require('..')
+const { parallel } = require('..')
 
 // without errors
 parallel([

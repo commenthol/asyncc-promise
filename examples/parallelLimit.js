@@ -1,4 +1,4 @@
-const {parallelLimit} = require('..')
+const { parallelLimit } = require('..')
 
 // without errors
 parallelLimit(2, [
@@ -30,7 +30,7 @@ parallelLimit(2, [
   () => Promise.reject(new Error(1)),
   () => new Promise((resolve) => setTimeout(() => resolve(3), 1)),
   () => new Promise((resolve) => setTimeout(() => resolve(5), 1))
-], {bail: true}).then((result) => { // won't reach here
+], { bail: true }).then((result) => { // won't reach here
 }).catch((err) => {
   console.log('#bail', err)
   //> { AsynccError: err_bail
@@ -45,7 +45,7 @@ parallelLimit(2, [
   () => new Promise((resolve) => {}),
   () => new Promise((resolve) => {}),
   () => new Promise((resolve) => {})
-], {timeout: 1}).then((result) => { // won't reach here
+], { timeout: 1 }).then((result) => { // won't reach here
 }).catch((err) => {
   console.log('#timeout', err)
   //> { AsynccError: err_timeout

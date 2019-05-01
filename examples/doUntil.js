@@ -1,4 +1,4 @@
-const {doUntil} = require('..')
+const { doUntil } = require('..')
 
 // without errors
 doUntil(

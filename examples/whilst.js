@@ -1,4 +1,4 @@
-const {whilst} = require('..')
+const { whilst } = require('..')
 
 let arr = []
 whilst(

@@ -1,4 +1,4 @@
-const {each} = require('..')
+const { each } = require('..')
 
 // without errors
 each([1, 2, 3],

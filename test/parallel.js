@@ -1,8 +1,8 @@
 /* global describe, it */
 
 import assert from 'assert'
-import {Timeout} from './intern/helper'
-import {parallel} from '..'
+import { Timeout } from './intern/helper'
+import { parallel } from '..'
 
 describe('#parallel', function () {
   it('parallel', function () {
@@ -14,8 +14,8 @@ describe('#parallel', function () {
       t.task(13),
       t.task(4)
     ]).then((res) => {
-      assert.deepEqual(t.order, [4, 13, 22, 31, 40])
-      assert.deepEqual(res, [40, 31, 22, 13, 4])
+      assert.deepStrictEqual(t.order, [4, 13, 22, 31, 40])
+      assert.deepStrictEqual(res, [40, 31, 22, 13, 4])
     })
   })
 
@@ -30,10 +30,10 @@ describe('#parallel', function () {
     ]).then(() => {
       assert.ok(false)
     }).catch((err) => {
-      assert.deepEqual(t.order, [4, 13, 22, 31, 40])
-      assert.deepEqual(err.errors, [undefined, 'error1', undefined, 'error2', undefined])
-      assert.deepEqual(err.results, [40, undefined, 22, undefined, 4])
-      assert.deepEqual(err.errpos, [3, 1])
+      assert.deepStrictEqual(t.order, [4, 13, 22, 31, 40])
+      assert.deepStrictEqual(err.errors, [null, 'error1', null, 'error2', null])
+      assert.deepStrictEqual(err.results, [40, undefined, 22, undefined, 4])
+      assert.deepStrictEqual(err.errpos, [3, 1])
     })
   })
 })

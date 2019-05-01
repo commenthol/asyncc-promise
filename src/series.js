@@ -1,4 +1,4 @@
-import {Series} from './intern/Series'
+import { Series } from './intern/Series'
 
 /**
 * Run `tasks` functions which return a promise in series
