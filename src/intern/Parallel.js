@@ -26,6 +26,7 @@ export class BaseParallel {
     this.run = this.run.bind(this)
     this.cb = this.cb.bind(this)
     this.final = this.final.bind(this)
+    if (limit <= 0) this.final()
   }
 
   init () {

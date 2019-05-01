@@ -74,6 +74,13 @@ describe('#eachLimit', function () {
       })
   })
 
+  it('should end on empty list', function () {
+    let t = new Timeout()
+    return eachLimit(2, [], (item, cb) => t.task(item)())
+      .then((res) => {
+        assert.deepStrictEqual(res, [])
+      })
+  })
 /* // TODO
   it.skip('fs.stat', function (done) {
     compose(
