@@ -1,6 +1,6 @@
 const { whilst } = require('..')
 
-let arr = []
+const arr = []
 whilst(
   (index) => index < 4,
   (index) => new Promise((resolve) => {

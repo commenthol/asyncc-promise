@@ -36,7 +36,7 @@ export class BaseParallel {
   }
 
   final (errMsg) {
-    let { error, results } = this
+    const { error, results } = this
     if (this.done++) return
     if (error.errpos.length || errMsg) {
       if (errMsg) error.message = errMsg
@@ -47,7 +47,7 @@ export class BaseParallel {
   }
 
   cb (j, err, res) {
-    let { error, results, opts } = this
+    const { error, results, opts } = this
     results[j] = res
     error.errors[j] = err || null
     if (err) {

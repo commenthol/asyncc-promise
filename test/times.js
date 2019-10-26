@@ -73,15 +73,15 @@ describe('#times', function () {
   })
 
   it('should run with lag', function () {
-    let arr = []
-    let start = Date.now()
+    const arr = []
+    const start = Date.now()
     return times({ times: 4, lag: 10 },
       (index) => new Promise((resolve) => {
         arr.push(index)
         resolve(index)
       })
     ).then((res) => {
-      let end = Date.now() - start
+      const end = Date.now() - start
       assert.strictEqual(res, 3)
       assert.ok(end >= 3 * 10, 'it took ' + end)
       assert.deepStrictEqual(arr, [0, 1, 2, 3])

@@ -17,7 +17,7 @@ const series2 = (tasks) => // eslint-disable-line no-unused-vars
   ), Promise.resolve([]))
 
 // Try! Change to series2
-let series = series1
+const series = series1
 
 // without errors
 series([

@@ -5,7 +5,7 @@ import { retry } from '..'
 
 describe('#retry', function () {
   it('should retry min. 2 times - passing times = 0', function () {
-    let arr = []
+    const arr = []
     return retry(0,
       (index) => {
         arr.push(index)
@@ -18,7 +18,7 @@ describe('#retry', function () {
   })
 
   it('should retry min. 2 times - passing times = 0', function () {
-    let arr = []
+    const arr = []
     return retry({ times: 0 },
       (index) => {
         arr.push(index)
@@ -31,7 +31,7 @@ describe('#retry', function () {
   })
 
   it('should retry 4 times on errors', function () {
-    let arr = []
+    const arr = []
     return retry(4,
       (index) => {
         arr.push(index)
@@ -47,7 +47,7 @@ describe('#retry', function () {
     var arr = []
     return retry(3,
       (index) => new Promise((resolve, reject) => { // task
-        let err = index < 2 ? new Error() : null
+        const err = index < 2 ? new Error() : null
         arr.push(index)
         if (err) reject(err)
         else resolve(index)
@@ -59,7 +59,7 @@ describe('#retry', function () {
   })
 
   it('should retry 1 time', function () {
-    let arr = []
+    const arr = []
     return retry(1,
       (index) => {
         arr.push(index)
@@ -72,15 +72,15 @@ describe('#retry', function () {
   })
 
   it('should run with lag', function () {
-    let arr = []
-    let start = Date.now()
+    const arr = []
+    const start = Date.now()
     return retry({ times: 4, lag: 10 },
       (index) => {
         arr.push(index)
         return Promise.reject(new Error())
       }
     ).catch((err) => {
-      let end = Date.now() - start
+      const end = Date.now() - start
       assert.ok(err)
       assert.ok(end >= 3 * 10, 'it took ' + end)
       assert.deepStrictEqual(arr, [0, 1, 2, 3])

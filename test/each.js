@@ -8,7 +8,7 @@ describe('#each', function () {
   const items = [40, 31, 22, 13, 4]
 
   it('each', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return each(items,
       (item) => t.task(item)()
     ).then((res) => {
@@ -18,7 +18,7 @@ describe('#each', function () {
   })
 
   it('with errors', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return each(items,
       (item, index) => {
         let err
@@ -34,7 +34,7 @@ describe('#each', function () {
         // console.log(err)
         assert.deepStrictEqual(t.order, [4, 13, 22, 31, 40])
         assert.deepStrictEqual(err.errors, [null, 'error1', null, 'error2', null])
-        assert.deepStrictEqual(err.results, [ 40, undefined, 22, undefined, 4 ])
+        assert.deepStrictEqual(err.results, [40, undefined, 22, undefined, 4])
         assert.deepStrictEqual(err.errpos, [3, 1])
       })
   })

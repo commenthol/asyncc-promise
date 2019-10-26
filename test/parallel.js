@@ -6,7 +6,7 @@ import { parallel } from '..'
 
 describe('#parallel', function () {
   it('parallel', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return parallel([
       t.task(40),
       t.task(31),
@@ -20,7 +20,7 @@ describe('#parallel', function () {
   })
 
   it('with errors', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return parallel([
       t.task(40),
       t.task(31, 'error1'),

@@ -7,7 +7,7 @@ require('core-js/es6/array.js')
 
 describe('#eachSeries', function () {
   it('eachSeries', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return eachSeries(
       [14, 13, 12, 11, 10],
       (item) => t.task(item)()
@@ -18,7 +18,7 @@ describe('#eachSeries', function () {
   })
 
   it('with errors', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return eachSeries(
       [14, 13, 12, 11, 10],
       (item, index) => {

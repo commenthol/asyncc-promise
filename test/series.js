@@ -18,7 +18,7 @@ describe('#series', function () {
   })
 
   it('async series', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return series([
       t.task(14),
       t.task(13),
@@ -31,7 +31,7 @@ describe('#series', function () {
   })
 
   it('with errors', function () {
-    let t = new Timeout()
+    const t = new Timeout()
     return series([
       t.task(14),
       t.task(13, new Error('error1')),

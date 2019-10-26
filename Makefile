@@ -1,6 +1,6 @@
 all: clean build
 
-test: v4. v6. v8.
+test: v8. v10. v12. v13.
 
 v%:
 	n $@
@@ -37,10 +37,7 @@ dist/index.js: src
 	&& npm run test:mocha \
 	&& npm version
 
-build: lib dist
-
-lib:
-	npm run transpile
+build: dist
 
 pack: node_modules build
 	rm *.tgz

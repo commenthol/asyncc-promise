@@ -11,7 +11,7 @@ describe('#compose', function () {
   })
 
   it('compose', function () {
-    let arg = { value: 0 }
+    const arg = { value: 0 }
     compose(
       step,
       step,
@@ -23,7 +23,7 @@ describe('#compose', function () {
   })
 
   it('with errors', function () {
-    let arg = { value: 0 }
+    const arg = { value: 0 }
     compose([
       step,
       step,
