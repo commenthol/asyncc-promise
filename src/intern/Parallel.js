@@ -65,7 +65,7 @@ export class BaseParallel {
     }
   }
 
-  run () {} // needs implementation
+  run (i) {} // needs implementation
 }
 
 export class EachLimit extends BaseParallel {

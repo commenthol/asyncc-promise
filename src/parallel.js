@@ -6,8 +6,11 @@ import parallelLimit from './parallelLimit'
 * Does not stop parallel execution on errors. *All tasks get executed.*
 * `then()` gets called after the longest running task finishes.
 *
-* If bail-out on first error is desired, consider `Promise.all()` as an alternative,
-* or set `{bail: true}` as option.
+* Consider [`Promise.allSettled()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled)
+* as replacement for this function.
+*
+* If bail-out on first error is desired, consider [`Promise.all()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all)
+* as an alternative, or set `{bail: true}` as option.
 *
 * @name parallel
 * @memberOf module:parallel
@@ -49,6 +52,6 @@ import parallelLimit from './parallelLimit'
 *   //> }
 * })
 */
-export default function parallel (tasks, opts) {
-  return parallelLimit(0, tasks, opts)
+export default function parallel (tasks, options) {
+  return parallelLimit(0, tasks, options)
 }
