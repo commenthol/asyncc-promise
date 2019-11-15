@@ -17,6 +17,8 @@ import eachLimit from './eachLimit'
 import eachSeries from './eachSeries'
 import parallel from './parallel'
 import parallelLimit from './parallelLimit'
+import allSettled from './allSettled'
+import allSettledLimit from './allSettledLimit'
 import { promisify } from './promisify'
 import retry from './retry'
 import series from './series'
@@ -34,6 +36,8 @@ export default {
   eachSeries,
   parallel,
   parallelLimit,
+  allSettled,
+  allSettledLimit,
   promisify,
   retry,
   series,
@@ -52,6 +56,8 @@ export {
   eachSeries,
   parallel,
   parallelLimit,
+  allSettled,
+  allSettledLimit,
   promisify,
   retry,
   series,

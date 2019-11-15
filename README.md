@@ -27,6 +27,8 @@ The module provided follows the [asyncc][] syntax.
 - [eachLimit](https://commenthol.github.io/asyncc-promise/module-parallel.html#.eachLimit)
 - [parallel](https://commenthol.github.io/asyncc-promise/module-parallel.html#.parallel)
 - [parallelLimit](https://commenthol.github.io/asyncc-promise/module-parallel.html#.parallelLimit)
+- [allSettled](https://commenthol.github.io/asyncc-promise/module-parallel.html#.allSettled)
+- [allSettledLimit](https://commenthol.github.io/asyncc-promise/module-parallel.html#.allSettledLimit)
 
 ## Installation
 
