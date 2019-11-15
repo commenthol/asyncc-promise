@@ -19,7 +19,7 @@ import { ParallelLimit } from './intern/Parallel'
 * @param {Number} limit - number of tasks running in parallel
 * @param {Array<Function>} tasks - Array of functions of type `() => Promise`
 * @param {Object} [options]
-* @param {Number} [options.timeout] - timeout in ms which throwing `AsynccError` in case that `tasks` are still running
+* @param {Number} [options.timeout] - timeout in ms which throws `AsynccError` in case that `tasks` are still running
 * @param {Boolean} [options.bail] - bail-out on first error
 * @return {Promise} on resolve `.then(results: Array<any> => {})` and
 * on reject `.catch(error: AsynccError => {})` where `error` is the first thrown

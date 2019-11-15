@@ -2,6 +2,8 @@
 * promisify async callback functions `(arg1, arg2, cb) => {}` become
 * `(arg1, arg2) => Promise`
 *
+* If on node consider `import { promisify } from 'util'` as alternative.
+*
 * @method promisify
 * @static
 *

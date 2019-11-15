@@ -14,7 +14,7 @@ import { EachLimit } from './intern/Parallel'
 * @param {Array<any>} items - Array of items
 * @param {Function} task - iterator function of type `(item: any, index: Number) => Promise`
 * @param {Object} [options]
-* @param {Number} [options.timeout] - timeout in ms which throwing `AsynccError` in case that `tasks` are still running
+* @param {Number} [options.timeout] - timeout in ms which throws `AsynccError` in case that `tasks` are still running
 * @param {Boolean} [options.bail] - bail-out on first error
 * @return {Promise} on resolve `.then(results: Array<any> => {})` and
 * on reject `.catch(error: AsynccError => {})` where `error` is the first thrown
@@ -51,8 +51,8 @@ import { EachLimit } from './intern/Parallel'
 *  //> }
 * })
 */
-export default function eachLimit (limit, items, task, opts) {
+export default function eachLimit (limit, items, task, options) {
   return new Promise((resolve, reject) => {
-    new EachLimit(limit, items, task, opts, resolve, reject)
+    new EachLimit(limit, items, task, options, resolve, reject)
   })
 }
