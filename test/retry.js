@@ -44,7 +44,7 @@ describe('#retry', function () {
   })
 
   it('should try to retry 3 times but stop on first non error', function () {
-    var arr = []
+    const arr = []
     return retry(3,
       (index) => new Promise((resolve, reject) => { // task
         const err = index < 2 ? new Error() : null

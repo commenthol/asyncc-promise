@@ -6,7 +6,7 @@ import { times } from '..'
 
 describe('#times', function () {
   it('should run 4 times', function () {
-    var arr = []
+    const arr = []
     return times(4,
       (index) => new Promise((resolve) => {
         setTimeout(() => {
@@ -64,7 +64,7 @@ describe('#times', function () {
   })
 
   it('should process large number of cycles', function () {
-    var size = 10000
+    const size = 10000
     return times(size,
       (i) => Promise.resolve(i)
     ).then((res) => {

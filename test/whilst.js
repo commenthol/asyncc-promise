@@ -5,7 +5,7 @@ import { whilst } from '..'
 
 describe('#whilst', function () {
   it('should run until condition returns false', function () {
-    var arr = []
+    const arr = []
     return whilst(
       (index) => (index < 4),
       (index) => new Promise((resolve) => {

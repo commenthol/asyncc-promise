@@ -3,7 +3,6 @@
 import assert from 'assert'
 import { Timeout } from './intern/helper'
 import { eachSeries } from '..'
-require('core-js/es6/array.js')
 
 describe('#eachSeries', function () {
   it('eachSeries', function () {
@@ -37,8 +36,8 @@ describe('#eachSeries', function () {
   })
 
   it('can process a very huge array', function () {
-    var size = 100000
-    var items = new Array(size).fill(1)
+    const size = 100000
+    const items = new Array(size).fill(1)
     return eachSeries(items, () => Promise.resolve())
       .then((res) => {
         assert.ok(res.length === size)
