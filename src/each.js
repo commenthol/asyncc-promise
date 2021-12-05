@@ -1,5 +1,8 @@
 import eachLimit from './eachLimit'
 
+/** @typedef {import('./types').IteratorFunction} IteratorFunction */
+/** @typedef {import('./types').ParallelOptions} ParallelOptions */
+
 /**
  * Run `items` on async `task` promise in parallel.
  *
@@ -9,11 +12,9 @@ import eachLimit from './eachLimit'
  * @memberOf module:parallel
  * @static
  * @method
- * @param {Array<any>} items - Array of items
- * @param {Function} task - iterator function of type `(item: any, index: Number) => Promise`
- * @param {Object} [options]
- * @param {Number} [options.timeout] - timeout in ms which throws `AsynccError` in case that `tasks` are still running
- * @param {Boolean} [options.bail] - bail-out on first error
+ * @param {any[]} items - Array of items
+ * @param {IteratorFunction} task - iterator function of type `(item: any, index: Number) => Promise`
+ * @param {ParallelOptions} [options]
  * @return {Promise} on resolve `.then(results: Array<any> => {})` and
  * on reject `.catch(error: AsynccError => {})` where `error` is the first thrown
  * error containing the properties:

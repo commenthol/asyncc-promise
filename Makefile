@@ -1,10 +1,10 @@
 all: clean build
 
-test: v8. v10. v12. v13.
+test: v10 v12 v14 v17 v16 
 
 v%:
 	n $@
-	npm test
+	npm run test:mocha
 
 gitChanges:
 	@git diff-files --quiet # fail if unstaged changes

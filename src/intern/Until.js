@@ -1,16 +1,27 @@
+/** @typedef {import('../types').IndexFunction} IndexFunction */
+/** @typedef {import('../types').IndexTestFunction} IndexTestFunction */
+/** @typedef {import('../types').Resolve} Resolve */
+/** @typedef {import('../types').Reject} Reject */
+/** @typedef {import('../types').TimesWithLag} TimesWithLag */
+
 export class BaseUntil {
+  /**
+   * @param {IndexTestFunction} test
+   * @param {IndexFunction} task
+   * @param {object} opts
+   * @param {Resolve} resolve
+   * @param {Reject} reject
+   */
   constructor (test, task, opts = {}, resolve, reject) {
-    Object.assign(this, {
-      test,
-      task,
-      opts,
-      resolve,
-      reject,
-      i: 0,
-      cb: this.cb.bind(this),
-      run: this.run.bind(this),
-      init: this.init.bind(this)
-    })
+    this.test = test
+    this.task = task
+    this.opts = opts
+    this.resolve = resolve
+    this.reject = reject
+    this.i = 0
+    this.cb = this.cb.bind(this)
+    this.run = this.run.bind(this)
+    this.init = this.init.bind(this)
   }
 
   init () {
@@ -22,6 +33,10 @@ export class BaseUntil {
     }
   }
 
+  /**
+   * @param {Error|null} err
+   * @param {any} [res]
+   */
   cb (err, res) {
     const { resolve, reject, run, test, i } = this
     if (err) {
@@ -43,6 +58,13 @@ export class BaseUntil {
 }
 
 export class Until extends BaseUntil {
+  /**
+   * @param {IndexTestFunction} test
+   * @param {IndexFunction} task
+   * @param {object} opts
+   * @param {Resolve} resolve
+   * @param {Reject} reject
+   */
   constructor (test, task, opts, resolve, reject) {
     super(test, task, opts, resolve, reject)
     this.init()
@@ -56,6 +78,13 @@ export class DoUntil extends Until {
 }
 
 export class Times extends BaseUntil {
+  /**
+   * @param {number} times
+   * @param {IndexFunction} task
+   * @param {TimesWithLag} opts
+   * @param {Resolve} resolve
+   * @param {Reject} reject
+   */
   constructor (times, task, opts, resolve, reject) {
     const test = (i) => (times > 0 && i >= times)
     super(test, task, opts, resolve, reject)
@@ -84,6 +113,10 @@ export class Times extends BaseUntil {
 }
 
 export class Retry extends Times {
+  /**
+   * @param {Error|null} err
+   * @param {any} [res]
+   */
   cb (err, res) {
     const { resolve, reject, run, test, i } = this
     if (!err || test(i)) {

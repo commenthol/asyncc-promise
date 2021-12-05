@@ -1,5 +1,7 @@
 import { EachSeries } from './intern/Series'
 
+/** @typedef {import('./types').IteratorFunction} IteratorFunction */
+
 /**
 * Run `items` on async `task` function in series. Stops at the first error encountered.
 *
@@ -7,9 +9,9 @@ import { EachSeries } from './intern/Series'
 * @memberOf module:serial
 * @static
 * @method
-* @param {Array<any>} items - Array of items
-* @param {Function} task - iterator function of type `(item: any, index: Number) => Promise`
-* @return {Promise} on resolve `.then(results: Array<any> => {})` and
+* @param {any[]} items Array of items
+* @param {IteratorFunction} task iterator function of type `(item: any, index: Number) => Promise`
+* @return {Promise<any[]>} on resolve `.then(results: Array<any> => {})` and
 * on reject `.catch(error => {})` where `error` is the first thrown
 * error containing the properties:
 * - `results: Array<Any>` returns the successfull results or undefined

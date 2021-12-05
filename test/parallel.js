@@ -1,5 +1,3 @@
-/* global describe, it */
-
 import assert from 'assert'
 import { Timeout } from './intern/helper'
 import { parallel } from '..'

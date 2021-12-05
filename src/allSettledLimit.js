@@ -1,6 +1,10 @@
 import { ParallelLimit } from './intern/Parallel'
 import { mapAllSettled } from './intern/mapAllSettled'
 
+/** @typedef {import('./types').TaskFunction} TaskFunction */
+/** @typedef {import('./types').ParallelOptions} ParallelOptions */
+/** @typedef {import('./types').Status} Status */
+
 /**
  * Run `tasks` returning Promises in parallel limited to `limit` parallel
  * running tasks.
@@ -18,16 +22,15 @@ import { mapAllSettled } from './intern/mapAllSettled'
  * @static
  * @method
  * @param {Number} limit - number of tasks running in parallel
- * @param {Array<Function>} tasks - Array of functions of type `() => Promise`
- * @param {Object} [options]
- * @param {Number} [options.timeout] - timeout in ms which resolves all `tasks` are still running
- * @return {Promise} on resolve `.then(results: Array<Object> => {})` where Object equals
+ * @param {TaskFunction[]} tasks - Array of functions of type `() => Promise`
+ * @param {ParallelOptions} [options]
+ * @return {Promise<Status[]>} on resolve `.then(results: Array<Object> => {})` where Object equals
  *   `{status: 'fullfiled', value: <any>}` or
  *   `{status: 'rejected', reason: <Error>}`
  *
  * @example <caption>without errors - runs 2 tasks in parallel</caption>
  * allSettledLimit(2, [
- *   () => Promise.resolve(1), // NOTE to wrap the Promise into a function
+ *   () => Promise.resolve(1), // NOTE: wrap the Promise into a function to defer execution
  *   () => Promise.resolve(3),
  *   () => Promise.resolve(5)
  * ]).then((results) => {
@@ -41,7 +44,7 @@ import { mapAllSettled } from './intern/mapAllSettled'
  * allSettledLimit(2, [
  *   () => Promise.reject(new Error(1)),
  *   () => Promise.resolve(3),
- *   () => Promise.reject(new Error(5))
+ *   async () => throw new Error(5)
  * ], {timeout: 100}).then((result) => {
  *   console.log(results)
  *   //> [{status: 'rejected', value: Error(1)},
@@ -49,7 +52,7 @@ import { mapAllSettled } from './intern/mapAllSettled'
  *   //>  {status: 'rejected', reason: Error(5)}]
  * })
  */
-export default function allSettledLimit (limit, tasks, options) {
+export default function allSettledLimit (limit, tasks, options = {}) {
   return new Promise((resolve, reject) => {
     new ParallelLimit(limit, tasks, options, resolve, reject)
   })

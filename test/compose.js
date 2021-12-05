@@ -1,4 +1,3 @@
-/* global describe, it */
 /* eslint prefer-promise-reject-errors: 0 */
 
 import assert from 'assert'

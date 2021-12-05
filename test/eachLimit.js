@@ -1,7 +1,3 @@
-/* global describe, it */
-
-// import fs from 'fs'
-// import path from 'path'
 import assert from 'assert'
 import { Timeout } from './intern/helper'
 import { eachLimit } from '..'

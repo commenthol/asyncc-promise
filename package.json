@@ -1,6 +1,6 @@
 {
   "name": "asyncc-promise",
-  "version": "1.1.1",
+  "version": "1.2.0-0",
   "description": "Just asynchronous patterns for promises",
   "keywords": [
     "async",
@@ -22,7 +22,6 @@
   ],
   "main": "dist/index.js",
   "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
   "types": "types/index.d.ts",
   "directories": {
     "lib": "lib",
@@ -37,7 +36,7 @@
     "clean": "rimraf lib coverage .nyc_output",
     "clean:all": "rimraf node_modules && npm run clean",
     "coverage": "nyc -r text -r html npm run test:mocha",
-    "doc": "jsdoc -c scripts/jsdoc/jsdoc.json",
+    "doc": "rm -r docs; jsdoc -c scripts/jsdoc/jsdoc.json",
     "lint": "eslint --fix --ext js .",
     "prepublishOnly": "npm run all",
     "readme": "markedpp --githubid -i README.md -o README.md",
@@ -69,16 +68,6 @@
       "./dist/index.js"
     ]
   },
-  "eslintConfig": {
-    "plugins": [
-      "standard"
-    ],
-    "extends": "standard",
-    "rules": {
-      "no-new": 0,
-      "spaced-comment": 0
-    }
-  },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
@@ -108,6 +97,6 @@
     "typescript": "^4.5.2"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=10.0.0"
   }
 }

@@ -1,5 +1,7 @@
 import { Compose } from './intern/Series'
 
+/** @typedef {import('./types').TaskFunction} TaskFunction */
+
 /**
  * Run composed `tasks` promises in series.
  *
@@ -10,7 +12,7 @@ import { Compose } from './intern/Series'
  * @memberOf module:serial
  * @static
  * @method
- * @param {...Function|Array} tasks - Arguments or Array of functions of type
+ * @param {TaskFunction[]} tasks - Arguments or Array of functions of type
  * `(arg: any) => Promise` where
  * - `arg` - an argument which is passed from one task to the other
  * @return {Function} composed function of `(arg: any) => Promise` where

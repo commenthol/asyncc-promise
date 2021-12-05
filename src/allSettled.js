@@ -1,5 +1,9 @@
 import allSettledLimit from './allSettledLimit'
 
+/** @typedef {import('./types').TaskFunction} TaskFunction */
+/** @typedef {import('./types').ParallelOptions} ParallelOptions */
+/** @typedef {import('./types').Status} Status */
+
 /**
  * Run `tasks` returning Promises in parallel
  *
@@ -12,15 +16,14 @@ import allSettledLimit from './allSettledLimit'
  * @memberOf module:parallel
  * @static
  * @method
- * @param {Array<Function>} tasks - Array of functions of type `() => Promise`
- * @param {Object} [options]
- * @param {Number} [options.timeout] - timeout in ms which resolves all `tasks` are still running
- * @return {Promise} on resolve `.then(results: Array<Object> => {})` where Object equals `{status: 'fullfiled', value: <any>}` or `{status: 'rejected', reason: <Error>}
+ * @param {TaskFunction[]} tasks - Array of functions of type `() => Promise`
+ * @param {ParallelOptions} [options]
+ * @return {Promise<Status[]>} on resolve `.then(results: Array<Object> => {})` where Object equals `{status: 'fullfiled', value: <any>}` or `{status: 'rejected', reason: <Error>}
  * @example <caption>without errors</caption>
  * allSettled([
- *   () => Promise.resolve(1), // NOTE to wrap the Promise into a function
+ *   () => Promise.resolve(1), // NOTE: wrap the Promise into a function to defer execution
  *   () => Promise.resolve(3),
- *   () => Promise.resolve(5)
+ *   async () => 5
  * ]).then((results) => {
  *   console.log(results)
  *   //> [{status: 'fullfilled', value: 1},
@@ -31,7 +34,7 @@ import allSettledLimit from './allSettledLimit'
  * allSettled([
  *   () => Promise.reject(new Error(1)),
  *   () => Promise.resolve(3),
- *   () => Promise.reject(new Error(5))
+ *   async () => throw new Error(5)
  * ], {timeout: 100}).then((result) => {
  *   console.log(results)
  *   //> [{status: 'rejected', value: Error(1)},

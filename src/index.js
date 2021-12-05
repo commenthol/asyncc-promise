@@ -9,24 +9,26 @@
 
 import AsynccError from './intern/AsynccError'
 
-import compose from './compose'
-import doUntil from './doUntil'
-import doWhilst from './doWhilst'
-import each from './each'
-import eachLimit from './eachLimit'
-import eachSeries from './eachSeries'
-import parallel from './parallel'
-import parallelLimit from './parallelLimit'
-import allSettled from './allSettled'
-import allSettledLimit from './allSettledLimit'
-import { promisify } from './promisify'
-import retry from './retry'
-import series from './series'
-import times from './times'
-import until from './until'
-import whilst from './whilst'
+import compose from './compose.js'
+import doUntil from './doUntil.js'
+import doWhilst from './doWhilst.js'
+import each from './each.js'
+import eachLimit from './eachLimit.js'
+import eachSeries from './eachSeries.js'
+import parallel from './parallel.js'
+import parallelLimit from './parallelLimit.js'
+import allSettled from './allSettled.js'
+import allSettledLimit from './allSettledLimit.js'
+import { promisify } from './promisify.js'
+import retry from './retry.js'
+import series from './series.js'
+import times from './times.js'
+import until from './until.js'
+import whilst from './whilst.js'
 
 export default {
+  allSettled,
+  allSettledLimit,
   AsynccError,
   compose,
   doUntil,
@@ -36,8 +38,6 @@ export default {
   eachSeries,
   parallel,
   parallelLimit,
-  allSettled,
-  allSettledLimit,
   promisify,
   retry,
   series,
@@ -47,6 +47,8 @@ export default {
 }
 
 export {
+  allSettled,
+  allSettledLimit,
   AsynccError,
   compose,
   doUntil,
@@ -56,8 +58,6 @@ export {
   eachSeries,
   parallel,
   parallelLimit,
-  allSettled,
-  allSettledLimit,
   promisify,
   retry,
   series,

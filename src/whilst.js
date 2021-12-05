@@ -1,5 +1,8 @@
 import until from './until'
 
+/** @typedef {import('./types').IndexFunction} IndexFunction */
+/** @typedef {import('./types').IndexTestFunction} IndexTestFunction */
+
 /**
  * Run `task` repeatedly until `test` returns `false`.
  * Calls next `.catch()` at the first error encountered.
@@ -8,8 +11,8 @@ import until from './until'
  * @memberOf module:serial
  * @static
  * @method
- * @param {Function} test - test function `(index: number) => Boolean`. If return value is `false` then promise gets resolved
- * @param {Function} task - iterator function of type `(index: Number) => Promise`
+ * @param {IndexTestFunction} test - test function `(index: number) => Boolean`. If return value is `false` then promise gets resolved
+ * @param {IndexFunction} task - iterator function of type `(index: Number) => Promise`
  * @returns {Promise}
  * @example
  * let arr = []

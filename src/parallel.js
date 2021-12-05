@@ -1,5 +1,8 @@
 import parallelLimit from './parallelLimit'
 
+/** @typedef {import('./types').TaskFunction} TaskFunction */
+/** @typedef {import('./types').ParallelOptions} ParallelOptions */
+
 /**
  * Run `tasks` returning Promises in parallel.
  *
@@ -15,10 +18,8 @@ import parallelLimit from './parallelLimit'
  * @memberOf module:parallel
  * @static
  * @method
- * @param {Array<Function>} tasks - Array of functions of type `() => Promise`
- * @param {Object} [options]
- * @param {Number} [options.timeout] - timeout in ms which throws `AsynccError` in case that `tasks` are still running
- * @param {Boolean} [options.bail] - bail-out on first error
+ * @param {TaskFunction[]} tasks - Array of functions of type `() => Promise`
+ * @param {ParallelOptions} [options]
  * @return {Promise} on resolve `.then(results: Array<any> => {})` and
  * on reject `.catch(error: AsynccError => {})` where `error` is the first thrown
  * error containing the properties:

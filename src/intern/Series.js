@@ -1,17 +1,29 @@
 
+/** @typedef {import('../types').IteratorFunction} IteratorFunction */
+/** @typedef {import('../types').TaskFunction} TaskFunction */
+/** @typedef {import('../types').Resolve} Resolve */
+/** @typedef {import('../types').Reject} Reject */
+
 export class BaseSeries {
+  /**
+   * @param {number} length
+   * @param {Resolve} resolve
+   * @param {Reject} reject
+   */
   constructor (length, resolve, reject) {
-    Object.assign(this, {
-      length,
-      resolve,
-      reject,
-      results: [],
-      i: 0
-    })
+    this.length = length
+    this.resolve = resolve
+    this.reject = reject
+    this.results = []
+    this.i = 0
     this.cb = this.cb.bind(this)
     this.run = this.run.bind(this)
   }
 
+  /**
+   * @param {Error|null} err
+   * @param {any} [res]
+   */
   cb (err, res) {
     const { results, length, i } = this
     results.push(res)
@@ -29,9 +41,16 @@ export class BaseSeries {
 }
 
 export class EachSeries extends BaseSeries {
+  /**
+   * @param {any[]} items
+   * @param {IteratorFunction} task
+   * @param {Resolve} resolve
+   * @param {Reject} reject
+   */
   constructor (items, task, resolve, reject) {
     super(items.length, resolve, reject)
-    Object.assign(this, { items, task })
+    this.items = items
+    this.task = task
     this.run()
   }
 
@@ -44,6 +63,11 @@ export class EachSeries extends BaseSeries {
 }
 
 export class Series extends BaseSeries {
+  /**
+   * @param {TaskFunction[]} tasks
+   * @param {Resolve} resolve
+   * @param {Reject} reject
+   */
   constructor (tasks, resolve, reject) {
     super(tasks.length, resolve, reject)
     this.tasks = tasks

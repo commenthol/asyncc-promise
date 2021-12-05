@@ -1,5 +1,8 @@
 import { DoUntil } from './intern/Until'
 
+/** @typedef {import('./types').IndexFunction} IndexFunction */
+/** @typedef {import('./types').IndexTestFunction} IndexTestFunction */
+
 /**
  * Run `task` one or more times until `test` returns `true`.
  * Calls next `.catch()` at the first error encountered.
@@ -8,8 +11,8 @@ import { DoUntil } from './intern/Until'
  * @memberOf module:serial
  * @static
  * @method
- * @param {Function} task - iterator function of type `(index: Number) => Promise`
- * @param {Function} test - test function `(index: number) => Boolean`.
+ * @param {IndexFunction} task - iterator function of type `(index: Number) => Promise`
+ * @param {IndexTestFunction} test - test function `(index: number) => Boolean`.
  * If return value is `true` then promise gets resolved
  * @return {Promise}
  *

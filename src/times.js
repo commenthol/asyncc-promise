@@ -1,5 +1,8 @@
 import { Times } from './intern/Until'
 
+/** @typedef {import('./types').TimesWithLag} TimesWithLag */
+/** @typedef {import('./types').IndexFunction} IndexFunction */
+
 /**
  * Run `task` repeatedly until number `times` is reached.
  *
@@ -10,10 +13,8 @@ import { Times } from './intern/Until'
  * @memberOf module:serial
  * @static
  * @method
- * @param {Number|Object} times - runs `times` times. If `times < 0` then "times" cycles endlessly until an error occurs.
- * @param {Number} [times.times=0] - max. number of retries
- * @param {Number} [times.lag=0] - time-lag in ms between retries
- * @param {Function} task - iterator function of type `(index: Number) => Promise`
+ * @param {Number|TimesWithLag} times runs `times` times. If `times < 0` then "times" cycles endlessly until an error occurs.
+ * @param {IndexFunction} task iterator function of type `(index: Number) => Promise`
  * @returns {Promise}
  *
  * @example
@@ -32,11 +33,14 @@ import { Times } from './intern/Until'
  */
 export default function times (times, task) {
   let opts = {}
+  let _times
   if (typeof times === 'object') {
     opts = times
-    times = times.times
+    _times = times.times || 0
+  } else {
+    _times = times || 0
   }
   return new Promise((resolve, reject) => {
-    new Times(times, task, opts, resolve, reject)
+    new Times(_times, task, opts, resolve, reject)
   })
 }

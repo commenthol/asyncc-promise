@@ -1,5 +1,7 @@
 import { Series } from './intern/Series'
 
+/** @typedef {import('./types').TaskFunction} TaskFunction */
+
 /**
  * Run `tasks` functions which return a promise in series
  * The function breaks after the first error encountered
@@ -10,7 +12,7 @@ import { Series } from './intern/Series'
  * @memberOf module:serial
  * @static
  * @method
- * @param {Array} tasks - Array of functions which return a Promise
+ * @param {TaskFunction[]} tasks - Array of functions which return a Promise
  * @return {Promise} on resolve `.then(results: Array<any> => {})` and
  * on reject `.catch(error => {})` where `error` is the first thrown
  * error containing the properties:

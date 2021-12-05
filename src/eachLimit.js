@@ -1,5 +1,8 @@
 import { EachLimit } from './intern/Parallel'
 
+/** @typedef {import('./types').IteratorFunction} IteratorFunction */
+/** @typedef {import('./types').ParallelOptions} ParallelOptions */
+
 /**
  * Run `items` on async `task` promise in parallel limited to `limit` running in
  * parallel.
@@ -10,12 +13,10 @@ import { EachLimit } from './intern/Parallel'
  * @memberOf module:parallel
  * @static
  * @method
- * @param {Number} limit - number of tasks running in parallel
- * @param {Array<any>} items - Array of items
- * @param {Function} task - iterator function of type `(item: any, index: Number) => Promise`
- * @param {Object} [options]
- * @param {Number} [options.timeout] - timeout in ms which throws `AsynccError` in case that `tasks` are still running
- * @param {Boolean} [options.bail] - bail-out on first error
+ * @param {number} limit - number of tasks running in parallel
+ * @param {any[]} items - Array of items
+ * @param {IteratorFunction} task - iterator function of type `(item: any, index: Number) => Promise`
+ * @param {ParallelOptions} [options]
  * @return {Promise} on resolve `.then(results: Array<any> => {})` and
  * on reject `.catch(error: AsynccError => {})` where `error` is the first thrown
  * error containing the properties:
@@ -51,7 +52,7 @@ import { EachLimit } from './intern/Parallel'
  *  //> }
  * })
  */
-export default function eachLimit (limit, items, task, options) {
+export default function eachLimit (limit, items, task, options = {}) {
   return new Promise((resolve, reject) => {
     new EachLimit(limit, items, task, options, resolve, reject)
   })
